@@ -1,0 +1,11 @@
+{
+  "name": "Haydi Yazalım! – Let’s Write!",
+  "short_name": "Haydi Yazalım!",
+  "description": "Türkçe ve İngilizce resimli yaratıcı yazma oyunu",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8f5ff",
+  "theme_color": "#7456d8",
+  "lang": "tr",
+  "orientation": "any"
+}
