@@ -8,6 +8,9 @@ type Pair = { tr: string; en: string };
 type Character = Pair & { image: string; emoji: string };
 type Round = { how: Pair; who: Character; action: Pair };
 
+const assetBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+const galleryImage = (filename: string) => `${assetBasePath}/gallery/${filename}`;
+
 const howOptions: Pair[] = [
   { tr: "merakla", en: "curiously" },
   { tr: "cesurca", en: "bravely" },
@@ -333,7 +336,7 @@ export default function Home() {
     if (!context) return;
     const title = storyTitle.trim() || t.untitled;
     const author = authorName.trim() || t.youngWriter;
-    const image = await loadImage(`/gallery/${round.who.image}`);
+    const image = await loadImage(galleryImage(round.who.image));
 
     context.font = "32px Georgia, serif";
     const lines = wrapText(context, story, 1020);
@@ -402,7 +405,7 @@ export default function Home() {
     const context = canvas.getContext("2d");
     if (!context) return;
     const author = authorName.trim() || t.youngWriter;
-    const image = await loadImage(`/gallery/${round.who.image}`);
+    const image = await loadImage(galleryImage(round.who.image));
     canvas.width = 1600;
     canvas.height = 1100;
 
@@ -537,7 +540,7 @@ export default function Home() {
             <div className={`portrait ${rolling ? "rolling" : ""}`}>
               <img
                 key={round.who.image}
-                src={`/gallery/${round.who.image}`}
+                src={galleryImage(round.who.image)}
                 alt={round.who[language]}
               />
               <div className="portrait-shine" />
@@ -596,7 +599,7 @@ export default function Home() {
                 className={character.image === round.who.image ? "selected" : ""}
                 onClick={() => chooseCharacter(character)}
               >
-                <img src={`/gallery/${character.image}`} alt="" />
+                <img src={galleryImage(character.image)} alt="" />
                 <span>
                   <strong>{character[language]}</strong>
                   <small>{character.image === round.who.image ? "✓ " + t.selected : character.emoji}</small>
